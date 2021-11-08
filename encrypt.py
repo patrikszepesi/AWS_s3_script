@@ -10,6 +10,10 @@ response = s3.list_buckets()
 client = boto3.client('s3')
 SSECNF = 'ServerSideEncryptionConfigurationNotFoundError'
 for bucket in response['Buckets']:
+  for v in bucket.values():
+      print(v)
+
+
   try:
     bucket = client.get_bucket_encryption(Bucket=bucket['Name'])
     # check current encryption here, if it's not what you want then update it
