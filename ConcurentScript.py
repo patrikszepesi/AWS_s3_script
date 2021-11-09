@@ -4,7 +4,7 @@ from boto3.s3.transfer import TransferConfig
 
 
 config = TransferConfig(use_threads=True,max_concurrency=500)
-bucket='foo-bucket83485345'
+bucket='testttttttt8843543'
 
 def iterate_bucket_items(bucket):
     """
@@ -35,6 +35,13 @@ for i in iterate_bucket_items(bucket):
     src_bucket=bucket
     client.copy(Key=src_key, Bucket=src_bucket,Config=config,
         CopySource={"Bucket": src_bucket, "Key": src_key},
-        ExtraArgs={'Metadata': {'mykey': 'myvalue'}})
+        ExtraArgs={
+        "Metadata": {
+            "creationDate": date_add
+        },
+        "MetadataDirective": "REPLACE",
+        "ACL":'bucket-owner-full-control',
+    }
+        )
     print(i)
 print("done")
