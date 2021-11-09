@@ -32,7 +32,7 @@ for i in iterate_bucket_items(bucket):
     src_bucket=bucket
     client.copy_object(Key=src_key, Bucket=src_bucket,
         CopySource={"Bucket": src_bucket, "Key": src_key},
-        Metadata={"FOOFI": date_add},
+        Metadata={"creationDate": date_add},
         MetadataDirective="REPLACE")
     print(i)
 print("done")
