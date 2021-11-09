@@ -1,9 +1,15 @@
 #Script saves metadata
 
+#which bucket csv
+#paginator
+#try catch
+
 import boto3
 from botocore.exceptions import ClientError
 
 s3Resource = boto3.resource('s3')
+client = boto3.client('s3')
+
 
 for bucket in s3Resource.buckets.all():
     #TRY BLOCK?
@@ -16,4 +22,4 @@ for bucket in s3Resource.buckets.all():
                        Metadata={"creationDate": date_add},
                        MetadataDirective="REPLACE")
 
-    print("Saving next bucket Bucket")
+    print("Saving next Bucket")
