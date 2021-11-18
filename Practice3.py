@@ -1,10 +1,15 @@
 import boto3
 client = boto3.client('s3')
 from boto3.s3.transfer import TransferConfig
+#4:03 5.5 million threshol io chunksize 2621440
+#3:59 5.5 million threshol io chunksize 262144
+#3:55 5.5 131144
 
-
-config = TransferConfig(use_threads=True,max_concurrency=500)
-bucket='testttttttt8843543'
+#https://stackoverflow.com/questions/46556972/what-is-optimal-setting-for-multipart-threshold-and-mutilpart-chunksize-while-do
+#https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/s3.html#boto3.s3.transfer.TransferConfig
+#multipart chuncisze 100mb, multipiart 5 gb,download attempts 100, max io chunck size 10mb,
+config = TransferConfig(use_threads=True,max_concurrency=100,multipart_chunksize=100886080,num_download_attempts=100,multipart_threshold=5500000,io_chunksize=10262144)
+bucket='foo-bucket83485345'
 
 def iterate_bucket_items(bucket):
     """
@@ -44,4 +49,3 @@ for i in iterate_bucket_items(bucket):
     }
         )
     print(i)
-print("done")
